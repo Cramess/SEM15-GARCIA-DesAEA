@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Gimnasio/">
+    <Project Path="Gimnasio/Gimnasio.Api/Gimnasio.Api.csproj" />
+    <Project Path="Gimnasio/Gimnasio.Datos/Gimnasio.Datos.csproj" />
+    <Project Path="Gimnasio/Gimnasio.Entidades/Gimnasio.Entidades.csproj" />
+    <Project Path="Gimnasio/Gimnasio.Negocio/Gimnasio.Negocio.csproj" />
+  </Folder>
+  <Project Path="InstructoresApi/InstructoresApi.csproj" />
+  <Project Path="GatewayApi/GatewayApi.csproj" />
+</Solution>

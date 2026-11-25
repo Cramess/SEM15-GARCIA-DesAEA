@@ -1,0 +1,106 @@
+### Pruebas SOLO por el gateway. Cambia @gw a la URL publica para repetirlas en la nube.
+@gw = http://localhost:5000
+# @gw = https://gateway-api-s15.onrender.com
+
+### 1. Login Gerente  [200]
+# @name loginGerente
+POST {{gw}}/gateway/auth/login
+Content-Type: application/json
+
+{ "correo": "gerente@gimnasio.com", "clave": "Clave123!" }
+
+###
+@tokenGerente = {{loginGerente.response.body.token}}
+
+### 2. Login Recepcionista  [200]
+# @name loginRecep
+POST {{gw}}/gateway/auth/login
+Content-Type: application/json
+
+{ "correo": "recepcion@gimnasio.com", "clave": "Clave123!" }
+
+###
+@tokenRecep = {{loginRecep.response.body.token}}
+
+### 3. Registro  [201]  (cambia el correo en cada ejecucion)
+POST {{gw}}/gateway/auth/registro
+Content-Type: application/json
+
+{ "correo": "nuevo1@gimnasio.com", "clave": "Clave123!" }
+
+### 4. Planes (publico)  [200]
+GET {{gw}}/gateway/planes
+
+### 5. Plan por id  [200]
+GET {{gw}}/gateway/planes/1
+
+### 6. Plan inexistente  [404]
+GET {{gw}}/gateway/planes/9999
+
+### 7. Crear plan sin token  [401 - lo responde el gateway]
+POST {{gw}}/gateway/planes
+Content-Type: application/json
+
+{ "nombre": "Plan Test", "precio": 99.90, "duracionMeses": 2, "activo": true }
+
+### 8. Crear plan con Recepcionista  [403 - lo responde la API]
+POST {{gw}}/gateway/planes
+Authorization: Bearer {{tokenRecep}}
+Content-Type: application/json
+
+{ "nombre": "Plan Test", "precio": 99.90, "duracionMeses": 2, "activo": true }
+
+### 9. Crear plan con Gerente  [201]
+POST {{gw}}/gateway/planes
+Authorization: Bearer {{tokenGerente}}
+Content-Type: application/json
+
+{ "nombre": "Plan Test", "precio": 99.90, "duracionMeses": 2, "activo": true }
+
+### 10. Actualizar plan (ajusta el id)  [204]
+PUT {{gw}}/gateway/planes/6
+Authorization: Bearer {{tokenGerente}}
+Content-Type: application/json
+
+{ "nombre": "Plan Test", "precio": 109.90, "duracionMeses": 2, "activo": true }
+
+### 11. Eliminar plan (ajusta el id)  [204]
+DELETE {{gw}}/gateway/planes/6
+Authorization: Bearer {{tokenGerente}}
+
+### 12. Socios sin token  [401]
+GET {{gw}}/gateway/socios
+
+### 13. Socios con token  [200]
+GET {{gw}}/gateway/socios
+Authorization: Bearer {{tokenRecep}}
+
+### 14. Instructores sin token  [401]
+GET {{gw}}/gateway/instructores
+
+### 15. Instructores con token  [200]
+GET {{gw}}/gateway/instructores
+Authorization: Bearer {{tokenRecep}}
+
+### 16. Instructor por id  [200]
+GET {{gw}}/gateway/instructores/2
+Authorization: Bearer {{tokenRecep}}
+
+### 17. Instructor inexistente  [404]
+GET {{gw}}/gateway/instructores/99
+Authorization: Bearer {{tokenRecep}}
+
+### 18. Token alterado  [401]
+GET {{gw}}/gateway/instructores
+Authorization: Bearer {{tokenRecep}}x
+
+### 19. Ruta inexistente en el gateway  [404]
+GET {{gw}}/gateway/nada
+
+### 20. 502 Bad Gateway: DETEN InstructoresApi y ejecuta  [502]
+GET {{gw}}/gateway/instructores
+Authorization: Bearer {{tokenRecep}}
+
+### 21. Llamada DIRECTA al microservicio 2 sin token  [401]
+GET http://localhost:5056/api/instructores
+# Nube: GET https://instructores-api-s15.onrender.com/api/instructores

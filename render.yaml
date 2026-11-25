@@ -1,0 +1,33 @@
+# Blueprint de Render (plan gratuito). Las variables con sync:false se piden en el panel.
+services:
+  - type: web
+    name: gimnasio-api-s15
+    runtime: docker
+    plan: free
+    dockerContext: ./Gimnasio
+    dockerfilePath: ./Gimnasio/Dockerfile
+    envVars:
+      - key: Database__Provider
+        value: Postgres
+      - key: ConnectionStrings__GimnasioDB
+        sync: false
+      - key: Jwt__Key
+        sync: false
+  - type: web
+    name: instructores-api-s15
+    runtime: docker
+    plan: free
+    dockerContext: ./InstructoresApi
+    dockerfilePath: ./InstructoresApi/Dockerfile
+    envVars:
+      - key: Jwt__Key
+        sync: false
+  - type: web
+    name: gateway-api-s15
+    runtime: docker
+    plan: free
+    dockerContext: ./GatewayApi
+    dockerfilePath: ./GatewayApi/Dockerfile
+    envVars:
+      - key: Jwt__Key
+        sync: false

@@ -1,0 +1,116 @@
+{
+    "Routes":  [
+                   {
+                       "UpstreamPathTemplate":  "/gateway/auth/{everything}",
+                       "UpstreamHttpMethod":  [
+                                                  "Post"
+                                              ],
+                       "DownstreamPathTemplate":  "/api/auth/{everything}",
+                       "DownstreamScheme":  "https",
+                       "DownstreamHostAndPorts":  [
+                                                      {
+                                                          "Host":  "gimnasio-api-s15.onrender.com",
+                                                          "Port":  443
+                                                      }
+                                                  ]
+                   },
+                   {
+                       "UpstreamPathTemplate":  "/gateway/auth/{everything}",
+                       "UpstreamHttpMethod":  [
+                                                  "Get"
+                                              ],
+                       "DownstreamPathTemplate":  "/api/auth/{everything}",
+                       "DownstreamScheme":  "https",
+                       "DownstreamHostAndPorts":  [
+                                                      {
+                                                          "Host":  "gimnasio-api-s15.onrender.com",
+                                                          "Port":  443
+                                                      }
+                                                  ],
+                       "AuthenticationOptions":  {
+                                                     "AuthenticationProviderKeys":  [
+                                                                                        "Bearer"
+                                                                                    ]
+                                                 }
+                   },
+                   {
+                       "UpstreamPathTemplate":  "/gateway/planes{everything}",
+                       "UpstreamHttpMethod":  [
+                                                  "Get"
+                                              ],
+                       "DownstreamPathTemplate":  "/api/planes{everything}",
+                       "DownstreamScheme":  "https",
+                       "DownstreamHostAndPorts":  [
+                                                      {
+                                                          "Host":  "gimnasio-api-s15.onrender.com",
+                                                          "Port":  443
+                                                      }
+                                                  ]
+                   },
+                   {
+                       "UpstreamPathTemplate":  "/gateway/planes{everything}",
+                       "UpstreamHttpMethod":  [
+                                                  "Post",
+                                                  "Put",
+                                                  "Delete"
+                                              ],
+                       "DownstreamPathTemplate":  "/api/planes{everything}",
+                       "DownstreamScheme":  "https",
+                       "DownstreamHostAndPorts":  [
+                                                      {
+                                                          "Host":  "gimnasio-api-s15.onrender.com",
+                                                          "Port":  443
+                                                      }
+                                                  ],
+                       "AuthenticationOptions":  {
+                                                     "AuthenticationProviderKeys":  [
+                                                                                        "Bearer"
+                                                                                    ]
+                                                 }
+                   },
+                   {
+                       "UpstreamPathTemplate":  "/gateway/socios{everything}",
+                       "UpstreamHttpMethod":  [
+                                                  "Get",
+                                                  "Post",
+                                                  "Put",
+                                                  "Delete"
+                                              ],
+                       "DownstreamPathTemplate":  "/api/socios{everything}",
+                       "DownstreamScheme":  "https",
+                       "DownstreamHostAndPorts":  [
+                                                      {
+                                                          "Host":  "gimnasio-api-s15.onrender.com",
+                                                          "Port":  443
+                                                      }
+                                                  ],
+                       "AuthenticationOptions":  {
+                                                     "AuthenticationProviderKeys":  [
+                                                                                        "Bearer"
+                                                                                    ]
+                                                 }
+                   },
+                   {
+                       "UpstreamPathTemplate":  "/gateway/instructores{everything}",
+                       "UpstreamHttpMethod":  [
+                                                  "Get"
+                                              ],
+                       "DownstreamPathTemplate":  "/api/instructores{everything}",
+                       "DownstreamScheme":  "https",
+                       "DownstreamHostAndPorts":  [
+                                                      {
+                                                          "Host":  "instructores-api-s15.onrender.com",
+                                                          "Port":  443
+                                                      }
+                                                  ],
+                       "AuthenticationOptions":  {
+                                                     "AuthenticationProviderKeys":  [
+                                                                                        "Bearer"
+                                                                                    ]
+                                                 }
+                   }
+               ],
+    "GlobalConfiguration":  {
+                                "BaseUrl":  "https://gateway-api-s15.onrender.com"
+                            }
+}
