@@ -1,7 +1,3 @@
--- Version PostgreSQL (Neon / Supabase) de GimnasioDB_Scrip.sql.
--- Los identificadores van entre comillas para coincidir con los nombres que usa EF Core.
--- Ejecutar en la base ya creada en la nube (no hay CREATE DATABASE).
-
 DROP TABLE IF EXISTS "Usuarios";
 DROP TABLE IF EXISTS "Socios";
 DROP TABLE IF EXISTS "Planes";
